@@ -1,15 +1,50 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Main {
-    public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+package app;
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+import java.util.Scanner;
+
+import model.Cliente;
+import service.ClienteService;
+import service.ContaService;
+import util.Menu;
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        Scanner scanner = new Scanner(System.in);
+
+        ClienteService clienteService = new ClienteService();
+        ContaService contaService = new ContaService();
+
+        int opcaoPrincipal;
+
+        do {
+            Menu.menuPrincipal();
+            opcaoPrincipal = scanner.nextInt();
+
+            switch (opcaoPrincipal) {
+
+                case 1:
+                    Menu.menuClientes(scanner, clienteService);
+                    break;
+
+                case 2:
+                    Menu.menuContas(scanner, clienteService, contaService);
+                    break;
+
+                case 0:
+                    System.out.println("Saindo do sistema...");
+                    break;
+
+                default:
+                    System.out.println("Opção inválida!");
+            }
+
+        } while (opcaoPrincipal != 0);
+
+        scanner.close();
     }
+
+
+
 }
